@@ -1,6 +1,9 @@
 District5 - PHP library creator
 ====
 
+[![CI](https://github.com/district-5/composer-package-with-tests/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/district-5/composer-package-with-tests/actions)
+[![Codecov](https://codecov.io/gh/district-5/composer-package-with-tests/branch/master/graph/badge.svg)](https://codecov.io/gh/district-5/composer-package-with-tests)
+
 This repository is a template for creating a PHP library with tests.
 
 It includes a basic structure for the library, as well as a test suite using PHPUnit.
