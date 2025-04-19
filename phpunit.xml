@@ -16,10 +16,10 @@
             pathCoverage="false"
             ignoreDeprecatedCodeUnits="true"
             disableCodeCoverageIgnore="true">
-<!--    <report>-->
-<!--      <html outputDirectory="build/html" lowUpperBound="50" highLowerBound="90"/>-->
-<!--      <clover outputFile="coverage.xml" />-->
-<!--    </report>-->
+    <report>
+      <html outputDirectory="build/html" lowUpperBound="50" highLowerBound="90"/>
+      <clover outputFile="coverage.xml" />
+    </report>
   </coverage>
   <php>
     <env name="THIS_IS_A_KEY" value="and-this-is-a-value" force="true"/>
