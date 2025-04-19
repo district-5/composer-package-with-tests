@@ -1,0 +1,25 @@
+{
+  "name": "district5/composer-package-with-tests",
+  "description": "A boilerplate library template.",
+  "keywords": ["district5", "library", "php", "template"],
+  "homepage": "https://github.com/district-5/composer-package-with-tests",
+  "license": "mit",
+  "authors": [
+    {
+      "name": "District5",
+      "email": "hello@district5.co.uk"
+    }
+  ],
+  "require": {
+    "php": ">=8.4"
+  },
+  "autoload": {
+    "psr-4": { "District5\\ComposerTemplate\\": "src/" }
+  },
+  "autoload-dev": {
+    "psr-4": { "District5\\ComposerTemplateTests\\": "tests/" }
+  },
+  "require-dev": {
+    "phpunit/phpunit": "*"
+  }
+}
