@@ -1,15 +1,19 @@
-Composer library template
+District5 - PHP library creator
 ====
 
-A boilerplate composer library, featuring PHPUnit.
+This repository is a template for creating a PHP library with tests.
+
+It includes a basic structure for the library, as well as a test suite using PHPUnit.
+
+Optionally you can include Codecov to track code coverage.
 
 ### Usage...
 
 ##### Quick route...
 
-1. `git clone git@github.com:district-5/composer-package-with-tests.git`
-2. `cd composer-package-with-tests`
-3. `./convert.sh` OR `./convert.sh MyNamespaceName`
+1. `git clone git@github.com:district-5/composer-package-with-tests.git ./some-new-name`
+2. `cd some-new-name`
+3. `./convert.sh`
 
 ##### Full steps...
 
