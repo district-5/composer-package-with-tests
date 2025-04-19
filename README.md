@@ -9,23 +9,37 @@ Optionally you can include Codecov to track code coverage.
 
 ### Usage...
 
-##### Quick route...
+#### Clone and run...
 
 1. `git clone git@github.com:district-5/composer-package-with-tests.git ./some-new-name`
 2. `cd some-new-name`
 3. `./convert.sh`
 
-##### Full steps...
+#### When running convert.sh...
 
-1. `git clone git@github.com:district-5/composer-package-with-tests.git`
-2. Edit the files, replacing `ComposerTemplateTests` with the name of your package and append `Tests`. For example...
-   `MyPackageTests`
-3. Edit the files, replacing `ComposerTemplate` with the name of your package. For example... `MyPackage`.
-4. The files you'll change are `composer.json`, `phpunit.xml` and several files across the `src` and `tests` directory.
-5. Install the autoloader with `composer install`
-6. Run the test suite `./vendor/bin/phpunit`
+   * Questions are asked in the following order:
+     1. Base namespace (Default: District5)
+     2. Project namespace: Required. Cannot be empty.
+     3. Include Codecov in GitHub Actions workflow? (y/n) (Default: y)
 
-### Undoing the change...
+Providing the following answers, the following will be generated:
+
+ * Target name: `\District5\MyProject`
+   * Answer 1: `District5`
+   * Answer 2: `MyProject`
+
+
+ * Target name: `\Foo\Bar`
+   * Answer 1: `Foo`
+   * Answer 2: `Bar`
+
+```
+Base namespace: Foo
+Project namespace: Bar
+Resulting Namespace: \Foo\Bar
+```
+
+### Reverting...
 
 If you've run a generation, and want to undo the changes, simply issue the following command...
 

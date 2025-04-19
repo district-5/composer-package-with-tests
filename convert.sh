@@ -63,20 +63,17 @@ echo ""
 NAMESPACE_NAME_LOWER=$(echo "${NAMESPACE_NAME}" | sed 's/\([A-Z]\)/-\1/g' | awk '{print tolower($0)}')
 NAMESPACE_NAME_LOWER=${NAMESPACE_NAME_LOWER:1}
 
-echo "Will change this code to use the namespaces of:"
-echo "  ${BASE_NAMESPACE}\\${NAMESPACE_NAME}"
-echo "  ${BASE_NAMESPACE}\\${NAMESPACE_NAME}Tests"
-echo "The composer package will be renamed to:"
-echo "  district5/${NAMESPACE_NAME_LOWER}"
+echo -e "${GREEN}The composer package will be renamed to:${NC}"
+echo -e "${GREEN}  district5/${NAMESPACE_NAME_LOWER}${NC}"
+
+FULL_NEW_NAMESPACE="${BASE_NAMESPACE}\\${NAMESPACE_NAME}"
+echo -e "${GREEN}Full new namespace: ${FULL_NEW_NAMESPACE}${NC}"
 
 if [[ "${1}" != '-y' ]] && [[ "${2}" != '-y' ]]; then
   echo ""
   echo "Sleeping for 4 seconds..."
   sleep 4
 fi
-
-FULL_NEW_NAMESPACE="${BASE_NAMESPACE}\\${NAMESPACE_NAME}"
-echo $"Full new namespace: ${FULL_NEW_NAMESPACE}"
 
 if [ -d "${DIRECTORY}/build" ]; then
   echo "Deleting build directory..."
