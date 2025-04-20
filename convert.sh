@@ -66,7 +66,7 @@ NAMESPACE_NAME_LOWER=${NAMESPACE_NAME_LOWER:1}
 echo -e "${GREEN}The composer package will be renamed to:${NC}"
 echo -e "${GREEN}  district5/${NAMESPACE_NAME_LOWER}${NC}"
 
-FULL_NEW_NAMESPACE="${BASE_NAMESPACE}\\${NAMESPACE_NAME}"
+FULL_NEW_NAMESPACE="\\${BASE_NAMESPACE}\\${NAMESPACE_NAME}"
 echo -e "${GREEN}Full new namespace: ${FULL_NEW_NAMESPACE}${NC}"
 
 if [[ "${1}" != '-y' ]] && [[ "${2}" != '-y' ]]; then
@@ -101,7 +101,7 @@ for file in $(find "${DIRECTORY}" -type f); do
   sed -i '' -e "s|${ORIGINAL_PACKAGE_NAME}|${NAMESPACE_NAME_LOWER}|g" "${file}"
   sed -i '' -e "s|A boilerplate library template.|${NAMESPACE_NAME} library|g" "${file}"
   sed -i '' -e "s|Composer library|${NAMESPACE_NAME}|g" "${file}"
-  sed -i '' -e "s|YEAR|$(date +%Y)|g" "${file}"
+  sed -i '' -e "s|2025|$(date +%Y)|g" "${file}"
 done
 
 NEW_README=$(cat <<-EOM
