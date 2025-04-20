@@ -84,7 +84,7 @@ fi
 # shellcheck disable=SC2044
 for file in $(find "${DIRECTORY}" -type f); do
   # if filename ends in sh, continue
-  if [[ "${file}" == *".sh" || "${file}" == *"coverage.xml" || "${file}" == *"junit.xml" || "${file}" == *".gitignore" || "${file}" == *"LICENSE" || "${file}" == *"composer.lock" || "${file}" == *"pull_request_template.md" ]]; then
+  if [[ "${file}" == *".sh" || "${file}" == *"coverage.xml" || "${file}" == *"junit.xml" || "${file}" == *".gitignore" || "${file}" == *"composer.lock" || "${file}" == *"pull_request_template.md" ]]; then
     continue
   fi
   # if filename contains /vendor/ or /.idea continue
