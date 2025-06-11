@@ -80,15 +80,32 @@ if [ -d "${DIRECTORY}/build" ]; then
   rm -rf "${DIRECTORY}/build"
 fi
 
+FILE_PATTERNS_TO_IGNORE=(
+  ".sh"
+  "coverage.xml"
+  "junit.xml"
+  ".gitignore"
+  "composer.lock"
+  "pull_request_template.md"
+  ".DS_Store"
+  "/vendor/"
+  "/.idea/"
+  "/.git/"
+  "/build/"
+  "/ISSUE_TEMPLATE/"
+)
 # iterate over all files of all types and echo the file name
 # shellcheck disable=SC2044
 for file in $(find "${DIRECTORY}" -type f); do
-  # if filename ends in sh, continue
-  if [[ "${file}" == *".sh" || "${file}" == *"coverage.xml" || "${file}" == *"junit.xml" || "${file}" == *".gitignore" || "${file}" == *"composer.lock" || "${file}" == *"pull_request_template.md" ]]; then
-    continue
-  fi
-  # if filename contains /vendor/ or /.idea continue
-  if [[ "${file}" == *"/vendor/"* || "${file}" == *"/.idea/"* || "${file}" == *"/.git/"* || "${file}" == *"/build/"* || "${file}" == *"/ISSUE_TEMPLATE/"* ]]; then
+  # check if file matches any ignore pattern
+  SKIP_FILE=false
+  for pattern in "${FILE_PATTERNS_TO_IGNORE[@]}"; do
+    if [[ "${file}" == *"${pattern}"* ]]; then
+      SKIP_FILE=true
+      break
+    fi
+  done
+  if [ "${SKIP_FILE}" = true ]; then
     continue
   fi
   echo "Processing file: ${file}"
