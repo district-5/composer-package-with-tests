@@ -49,10 +49,10 @@ if [ -z "${NAMESPACE_NAME}" ]; then
   exit 1
 fi
 
-if [[ "${NAMESPACE_NAME}" =~ ^[[:alnum:]]*$ ]] && [[ ! "${NAMESPACE_NAME}" =~ ^[[:digit:]]+$ ]] && [[ "${NAMESPACE_NAME:0:1}" == [A-Z] ]]; then
+if [[ "${NAMESPACE_NAME}" =~ ^[A-Z][A-Za-z0-9\\]*$ ]] && [[ ! "${NAMESPACE_NAME}" =~ ^[[:digit:]]+$ ]]; then
   echo "  - Complete NS: ${BASE_NAMESPACE}\\${NAMESPACE_NAME}"
 else
-  echo -e "\033[0;31m! Namespace must be alphanumeric and start with a capital letter !\033[0m"
+  echo -e "\033[0;31m! Namespace must be alphanumeric, can include backslashes for sub-namespaces, and start with a capital letter !\033[0m"
   exit 1
 fi
 
@@ -60,7 +60,9 @@ echo ""
 echo "----"
 echo ""
 
-NAMESPACE_NAME_LOWER=$(echo "${NAMESPACE_NAME}" | sed 's/\([A-Z]\)/-\1/g' | awk '{print tolower($0)}')
+NAMESPACE_NAME_LOWER=$(echo "${NAMESPACE_NAME}" | sed 's/\\/-/g' | sed 's/\([A-Z]\)/-\1/g' | awk '{print tolower($0)}')
+# shellcheck disable=SC2001
+NAMESPACE_NAME_LOWER=$(echo "${NAMESPACE_NAME_LOWER}" | sed 's/--/-/g')
 NAMESPACE_NAME_LOWER=${NAMESPACE_NAME_LOWER:1}
 
 echo -e "${GREEN}The composer package will be renamed to:${NC}"
@@ -113,7 +115,7 @@ for file in $(find "${DIRECTORY}" -type f); do
   sed -i '' -e "s|@package District5|@package ${BASE_NAMESPACE}|g" "${file}"
   sed -i '' -e "s|namespace District5|namespace ${BASE_NAMESPACE}|g" "${file}"
   sed -i '' -e "s|use District5|use ${BASE_NAMESPACE}|g" "${file}"
-  sed -i '' -e "s|\"psr-4\": { \"District5|\"psr-4\": { \"${BASE_NAMESPACE}|g" "${file}"
+  sed -i '' -e "s|\"psr-4\": { \"District5|\"psr-4\": { \"${BASE_NAMESPACE//\\/\\\\}|g" "${file}"
   sed -i '' -e "s|${ORIGINAL_NAMESPACE}|${NAMESPACE_NAME}|g" "${file}"
   sed -i '' -e "s|${ORIGINAL_PACKAGE_NAME}|${NAMESPACE_NAME_LOWER}|g" "${file}"
   sed -i '' -e "s|A boilerplate library template.|${NAMESPACE_NAME} library|g" "${file}"
